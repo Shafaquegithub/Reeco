@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { configureStore } from "@reduxjs/toolkit";
+import "./App.css";
+import TableContainer from "./Components/Table/TableContainer";
+import ProductReducer from "./Components/Data/ProductReducer";
+import { Provider } from "react-redux";
+import TopBar from "./Components/TopBar/TopBar";
+import TitleBar from "./Components/TitleBar/TitleBar";
+import MenuBar from "./Components/MenuBar/MenuBar";
 function App() {
+  const store = configureStore({
+    reducer: {
+      products: ProductReducer,
+    },
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Provider store={store}>
+        <MenuBar />
+        <TitleBar />
+        <TopBar />
+        <TableContainer />
+      </Provider>
+    </>
   );
 }
 
